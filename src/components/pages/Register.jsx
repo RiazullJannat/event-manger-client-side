@@ -16,6 +16,21 @@ const Register = () => {
                 let user = res.user;
                 setProfile(user, name)
                     .then(() => {
+                        let newUser = {
+                            name: user.displayName,
+                            email: user.email,
+                            photo: user.photoURL,
+                            roll: 'user'
+                        }
+                        fetch("http://localhost:5000/register", {
+                            method: "POST",
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(newUser)
+                        })
+                            .then(res => { res.json() })
+                            .then(data => console.log(data));
                         setLoading(false);
                         navigate('/');
                         console.log("registration successful..");
