@@ -3,15 +3,15 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router";
 
 const Login = () => {
-    const { login } = useContext(AuthContext);
+    const { login, setLoading } = useContext(AuthContext);
     const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
         login(email, password)
-            .then(res => {
-                console.log(res.user)
+            .then(() => {
+                setLoading(false);
                 navigate('/');
             })
             .catch(error => console.log(error.message));

@@ -3,7 +3,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router";
 
 const Register = () => {
-    const { createUser, setProfile, setLoading } = useContext(AuthContext);
+    const { createUser, setProfile, setLoading, loading } = useContext(AuthContext);
     const navigate = useNavigate();
     const handleSubmit = e => {
         e.preventDefault();
@@ -20,7 +20,7 @@ const Register = () => {
                             name: user.displayName,
                             email: user.email,
                             photo: user.photoURL,
-                            roll: 'user'
+                            role: 'user'
                         }
                         fetch("http://localhost:5000/register", {
                             method: "POST",
@@ -29,16 +29,20 @@ const Register = () => {
                             },
                             body: JSON.stringify(newUser)
                         })
-                            .then(res => { res.json() })
-                            .then(data => console.log(data));
-                        setLoading(false);
-                        navigate('/');
-                        console.log("registration successful..");
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    setLoading(false);
+                                    navigate('/');
+                                    alert("registration successful.");
+                                }
+                            });
                     })
                     .catch(error => console.log(error.message))
             })
             .catch(error => console.log(error.message));
     }
+
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -64,6 +68,11 @@ const Register = () => {
                             </fieldset>
                         </form>
                     </div>
+                </div>
+                <div>
+                    {
+                        loading ? <span className="loading loading-spinner text-info"></span> : ""
+                    }
                 </div>
             </div>
         </div>

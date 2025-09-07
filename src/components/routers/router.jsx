@@ -8,6 +8,7 @@ import Register from "../pages/Register";
 import PrivateRoute from "./PrivateRoute";
 import MyBookings from "../pages/MyBookings";
 import AddEvent from "../pages/AddEvent";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -37,7 +38,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/add-event',
-                element: <PrivateRoute><AddEvent /></PrivateRoute>
+                element: <AdminRoute><AddEvent /></AdminRoute>
             }
         ]
     }

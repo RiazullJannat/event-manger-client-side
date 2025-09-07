@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { NavLink } from "react-router";
 import { AuthContext } from "../../providers/AuthProvider";
+import { useRole } from "../../customHooks/useRole";
 const NavBar = () => {
     const { user, signout } = useContext(AuthContext);
+    const [role] = useRole();
     const handleSignout = () => {
         signout()
             .then(res => console.log(res))
@@ -16,7 +18,9 @@ const NavBar = () => {
                 user ?
                     <>
                         <li><NavLink to={'/my-bookings'}>My Bookings</NavLink></li>
-                        <li><NavLink to={'/add-event'}>Add Event</NavLink></li>
+                        {
+                            role == 'admin' ? <li><NavLink to={'/add-event'}>Add Event</NavLink></li> : ""
+                        }
                         <li><NavLink onClick={handleSignout}>signout</NavLink></li>
                     </> :
                     <>
