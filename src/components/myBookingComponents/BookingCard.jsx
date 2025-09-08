@@ -2,6 +2,27 @@ import React from 'react';
 
 const BookingCard = ({ booking }) => {
     const { eventName, date, image, tickets } = booking;
+    const handleSubmit = e => {
+        e.preventDefault();
+        const data = {
+            rating: e.target.rating.value,
+            review: e.target.review.value,
+        }
+        fetch("http://localhost:5000/review", {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    console.log('success');
+                    e.target.reset();
+                }
+            });
+    }
     return (
         <div className="card card-side bg-base-100 shadow-md border hover:shadow-lg transition duration-300 ">
 
@@ -34,8 +55,7 @@ const BookingCard = ({ booking }) => {
             {/* Add Review Section */}
             <div className="mt-4 border-t pt-4 w-[50%]">
                 <h3 className="text-base font-semibold mb-2">Add a Review</h3>
-                <form className="space-y-2">
-                    {/* Rating Input */}
+                <form className="space-y-2" onSubmit={handleSubmit}>
                     <div>
                         <label className="label">
                             <span className="label-text text-sm">Rating (Out of 5)</span>
@@ -45,29 +65,23 @@ const BookingCard = ({ booking }) => {
                             min="1"
                             max="5"
                             name="rating"
-                            // value={rating}
-                            // onChange={(e) => setRating(e.target.value)}
                             required
                             className="input input-bordered w-full max-w-xs"
                         />
                     </div>
 
-                    {/* Comment Textarea */}
                     <div>
                         <label className="label">
                             <span className="label-text text-sm">Comment</span>
                         </label>
                         <textarea
-                            name="comment"
-                            // value={comment}
-                            // onChange={(e) => setComment(e.target.value)}
+                            name="review" // ✅ Fixed from comment → review
                             placeholder="Write your feedback..."
                             required
                             className="textarea textarea-bordered w-full"
                         ></textarea>
                     </div>
 
-                    {/* Submit Review */}
                     <div className="text-right">
                         <button type="submit" className="btn btn-sm btn-success">
                             Submit Review
