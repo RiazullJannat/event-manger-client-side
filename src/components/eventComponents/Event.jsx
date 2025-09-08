@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { NavLink, useParams } from 'react-router';
 
 const Event = () => {
     const { id } = useParams();
@@ -17,7 +17,6 @@ const Event = () => {
         date,
         location,
         seats,
-        deadline,
         fee
     } = event;
     return (
@@ -57,13 +56,13 @@ const Event = () => {
                     </div>
                     <div>
                         <span className="font-medium">Registration Deadline:</span>{" "}
-                        {new Date(deadline).toLocaleDateString()}
+                        {date}
                     </div>
                 </div>
 
                 {/* Button */}
                 <div className="mt-6">
-                    <button className="btn btn-primary w-full">Register Now</button>
+                    <NavLink to={`/events/${id}/register`} className="btn btn-primary w-full">Register Now</NavLink>
                 </div>
             </div>
         </div>

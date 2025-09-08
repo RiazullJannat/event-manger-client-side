@@ -43,11 +43,11 @@ export const router = createBrowserRouter([
                 element: <AdminRoute><AddEvent /></AdminRoute>
             },
             {
-                path: 'events/:id',
+                path: '/events/:id',
                 element: <Event />
             },
             {
-                path: 'events/:id/register',
+                path: '/events/:id/register',
                 element: <PrivateRoute><RegisterEvent /></PrivateRoute>
             }
         ]
