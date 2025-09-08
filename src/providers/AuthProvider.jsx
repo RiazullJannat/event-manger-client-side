@@ -8,6 +8,7 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
+    const [events, setEvents] = useState([]);
 
     const createUser = (email, password) => {
         setLoading(true);
@@ -48,6 +49,8 @@ const AuthProvider = ({ children }) => {
         setProfile,
         login,
         signout,
+        events,
+        setEvents
 
     }
     return (

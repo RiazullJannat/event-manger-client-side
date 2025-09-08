@@ -11,7 +11,7 @@ const EventCard = ({ event }) => {
         category,
     } = event;
     return (
-        <NavLink to={`${event._id}`}>
+        <NavLink to={`/events/${event._id}`}>
             <div className="card bg-base-100 shadow-md hover:shadow-xl transition duration-300 cursor-pointer border">
                 <figure>
                     <img src={image} alt={eventName} className="w-full h-52 object-cover" />
