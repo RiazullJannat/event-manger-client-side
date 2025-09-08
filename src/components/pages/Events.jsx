@@ -6,7 +6,7 @@ const Events = () => {
     const [events, setEvents] = useState([]);
     const { category } = useParams();
     useEffect(() => {
-        fetch(`http://localhost:5000/events?category=${category}`)
+        fetch(`https://event-manager-server-kappa.vercel.app/events?category=${category}`)
             .then(res => res.json())
             .then(data => {
                 setEvents(data);

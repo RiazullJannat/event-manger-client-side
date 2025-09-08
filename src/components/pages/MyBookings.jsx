@@ -7,7 +7,7 @@ const MyBookings = () => {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/my-bookings?email=${user?.email}`)
+        fetch(`https://event-manager-server-kappa.vercel.app/my-bookings?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setBookings(data));
     }, [user])

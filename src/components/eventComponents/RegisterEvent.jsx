@@ -11,7 +11,7 @@ const RegisterEvent = () => {
         const form = new FormData(e.target);
         const formData = Object.fromEntries(form.entries());
         formData.eventId = id;
-        fetch("http://localhost:5000/event/registration", {
+        fetch("https://event-manager-server-kappa.vercel.app/event/registration", {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

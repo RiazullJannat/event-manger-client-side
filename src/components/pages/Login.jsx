@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router";
+import Google from "../socialLogin/Google";
 
 const Login = () => {
     const { login, setLoading } = useContext(AuthContext);
@@ -36,6 +37,7 @@ const Login = () => {
                                 <input type="password" className="input" placeholder="Password" name="password" />
                                 <div><a className="link link-hover">Forgot password?</a></div>
                                 <button type="submit" className="btn btn-neutral mt-4">Login</button>
+                                <Google/>
                             </fieldset>
                         </form>
                     </div>

@@ -5,7 +5,7 @@ const Event = () => {
     const { id } = useParams();
     const [event, setEvent] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/events/${id}`)
+        fetch(`https://event-manager-server-kappa.vercel.app/events/${id}`)
             .then(res => res.json())
             .then(data => setEvent(data));
     }, [id]);

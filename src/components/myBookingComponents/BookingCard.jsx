@@ -8,7 +8,7 @@ const BookingCard = ({ booking }) => {
             rating: e.target.rating.value,
             review: e.target.review.value,
         }
-        fetch("http://localhost:5000/review", {
+        fetch("https://event-manager-server-kappa.vercel.app/review", {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

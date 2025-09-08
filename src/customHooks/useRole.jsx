@@ -7,7 +7,7 @@ export const useRole = () => {
     const { user } = useContext(AuthContext);
     useEffect(() => {
         if (user && user?.email) {
-            fetch(`http://localhost:5000/role?email=${user?.email}`)
+            fetch(`https://event-manager-server-kappa.vercel.app/role?email=${user?.email}`)
                 .then(res => res.json())
                 .then(data => {
                     setRole(data.role);

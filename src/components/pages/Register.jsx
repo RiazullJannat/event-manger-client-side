@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router";
+import Google from "../socialLogin/Google";
 
 const Register = () => {
     const { createUser, setProfile, setLoading, loading } = useContext(AuthContext);
@@ -22,7 +23,7 @@ const Register = () => {
                             photo: user.photoURL,
                             role: 'user'
                         }
-                        fetch("http://localhost:5000/register", {
+                        fetch("https://event-manager-server-kappa.vercel.app/register", {
                             method: "POST",
                             headers: {
                                 'content-type': 'application/json'
@@ -67,6 +68,7 @@ const Register = () => {
                                 <button type="submit" className="btn btn-neutral mt-4">register</button>
                             </fieldset>
                         </form>
+                        <Google />
                     </div>
                 </div>
                 <div>

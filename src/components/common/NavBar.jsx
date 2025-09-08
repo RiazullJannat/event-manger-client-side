@@ -51,11 +51,13 @@ const NavBar = () => {
             </div>
             <div className="navbar-end">
                 <NavLink to={'/profile'}>
-                    <img
-                        src={user?.photoURL || "https://i.ibb.co.com/BK6560f/user6.png"}
-                        alt="Profile"
-                        className="w-14 h-14 mx-auto rounded-full border-2 border-primary object-cover"
-                    />
+                    {
+                        user ? <img
+                            src={user?.photoURL || "https://i.ibb.co.com/BK6560f/user6.png"}
+                            alt="Profile"
+                            className="w-14 h-14 mx-auto rounded-full border-2 border-primary object-cover"
+                        /> : ""
+                    }
                 </NavLink>
             </div>
         </div>

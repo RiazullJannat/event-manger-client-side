@@ -14,7 +14,7 @@ const AddEvent = () => {
             .then(res => res.json())
             .then(data => {
                 formData.image = data.data.display_url;
-                fetch("http://localhost:5000/add-event",
+                fetch("https://event-manager-server-kappa.vercel.app/add-event",
                     {
                         method: "POST",
                         headers: {

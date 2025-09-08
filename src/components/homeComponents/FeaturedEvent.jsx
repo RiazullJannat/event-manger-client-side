@@ -4,7 +4,7 @@ const FeaturedEvent = () => {
     const [featuredEvent, setFeaturedEvent] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/featured-event')
+        fetch('https://event-manager-server-kappa.vercel.app/featured-event')
             .then(res => res.json())
             .then(data => setFeaturedEvent(data))
     }, [])
