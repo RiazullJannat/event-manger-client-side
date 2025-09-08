@@ -11,6 +11,7 @@ import AddEvent from "../pages/AddEvent";
 import AdminRoute from "./AdminRoute";
 import Event from "../eventComponents/Event";
 import RegisterEvent from "../eventComponents/RegisterEvent";
+import Profile from "../pages/Profile";
 
 export const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
             {
                 path: '/events/:id/register',
                 element: <PrivateRoute><RegisterEvent /></PrivateRoute>
+            },
+            {
+                path: '/profile',
+                element: <Profile />
             }
         ]
     }
