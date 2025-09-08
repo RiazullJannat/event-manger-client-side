@@ -1,6 +1,38 @@
 const AddEvent = () => {
+    const imageHoistingKey = import.meta.env.VITE_IMAGE_HOISTING_KEY;
+    const imageHosingUrl = `https://api.imgbb.com/1/upload?key=${imageHoistingKey}`;
     const handleSubmit = e => {
         e.preventDefault();
+        const form = new FormData(e.target);
+        const formData = Object.fromEntries(form.entries());
+        const imgData = new FormData();
+        imgData.append('image', formData.image);
+        fetch(imageHosingUrl, {
+            method: 'POST',
+            body: imgData,
+        })
+            .then(res => res.json())
+            .then(data => {
+                formData.image = data.data.display_url;
+                fetch("http://localhost:5000/add-event",
+                    {
+                        method: "POST",
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    }
+                )
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.insertedId) {
+                            console.log("success...");
+                            e.target.reset();
+                        }
+                    })
+                    .catch(error => console.log(error.message));
+            });
+
     }
     return (
         <div>
@@ -54,8 +86,8 @@ const AddEvent = () => {
                         <label className="label">
                             <span className="label-text font-semibold">Category</span>
                         </label>
-                        <select name="category" className="select select-bordered w-full" required>
-                            <option disabled selected>Choose category</option>
+                        <select default="default" name="category" className="select select-bordered w-full" required>
+                            <option disabled value={"default"}>Choose category</option>
                             <option value="Workshop">Workshop</option>
                             <option value="Conference">Conference</option>
                             <option value="Meetup">Meetup</option>
@@ -102,7 +134,6 @@ const AddEvent = () => {
                             name="image"
                             className="file-input file-input-bordered w-full"
                             accept="image/*"
-                            required
                         />
                     </div>
 
