@@ -39,7 +39,6 @@ const AddEvent = () => {
             <div className="max-w-xl mx-auto p-6 bg-base-100 rounded-lg shadow-md mt-5">
                 <h2 className="text-2xl font-bold mb-4 text-center">Add New Event</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
-
                     {/* Event Name */}
                     <div>
                         <label className="label">
@@ -53,7 +52,6 @@ const AddEvent = () => {
                             required
                         />
                     </div>
-
                     {/* Date */}
                     <div>
                         <label className="label">
@@ -66,7 +64,6 @@ const AddEvent = () => {
                             required
                         />
                     </div>
-
                     {/* Location */}
                     <div>
                         <label className="label">
@@ -80,7 +77,6 @@ const AddEvent = () => {
                             required
                         />
                     </div>
-
                     {/* Category */}
                     <div>
                         <label className="label">
@@ -94,7 +90,6 @@ const AddEvent = () => {
                             <option value="Webinar">Webinar</option>
                         </select>
                     </div>
-
                     {/* Description */}
                     <div>
                         <label className="label">
@@ -108,7 +103,6 @@ const AddEvent = () => {
                             required
                         ></textarea>
                     </div>
-
                     {/* Number of Seats */}
                     <div>
                         <label className="label">
@@ -123,7 +117,21 @@ const AddEvent = () => {
                             required
                         />
                     </div>
-
+                    {/* Registration Fee */}
+                    <div>
+                        <label className="label">
+                            <span className="label-text font-semibold">Registration Fee (TK)</span>
+                        </label>
+                        <input
+                            type="number"
+                            name="fee"
+                            className="input input-bordered w-full"
+                            min="0"
+                            step="0.01"
+                            placeholder="e.g. 500"
+                            required
+                        />
+                    </div>
                     {/* Event Image */}
                     <div>
                         <label className="label">
@@ -136,7 +144,6 @@ const AddEvent = () => {
                             accept="image/*"
                         />
                     </div>
-
                     {/* Submit Button */}
                     <div className="text-center">
                         <button type="submit" className="btn btn-primary w-full">

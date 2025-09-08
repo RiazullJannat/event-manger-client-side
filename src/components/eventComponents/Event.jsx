@@ -1,39 +1,69 @@
-const Event = ({ event }) => {
-    console.log(event);
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+
+const Event = () => {
+    const { id } = useParams();
+    const [event, setEvent] = useState([]);
+    useEffect(() => {
+        fetch(`http://localhost:5000/events/${id}`)
+            .then(res => res.json())
+            .then(data => setEvent(data));
+    }, [id]);
     const {
         eventName,
         image,
+        description,
+        category,
         date,
         location,
         seats,
-        category,
+        deadline,
+        fee
     } = event;
     return (
-        <div className="card bg-base-100 shadow-md hover:shadow-xl transition duration-300 cursor-pointer border">
-            <figure>
-                <img src={image} alt={eventName} className="w-full h-52 object-cover" />
-            </figure>
-            <div className="card-body">
-                {/* Category Badge */}
-                <div className="flex justify-between items-start">
-                    <h2 className="card-title text-xl font-semibold">{eventName}</h2>
-                    <div className="badge badge-secondary text-xs">{category}</div>
+        <div className="max-w-3xl mx-auto bg-base-100 shadow-xl rounded-lg overflow-hidden mt-10 border">
+            {/* Image */}
+            <img src={image} alt={eventName} className="w-full h-60 object-cover" />
+
+            <div className="p-6">
+                {/* Title + Category badge */}
+                <div className="flex justify-between items-center">
+                    <h2 className="text-2xl font-bold">{eventName}</h2>
+                    <span className="badge badge-accent text-xs">{category}</span>
                 </div>
 
-                {/* Date & Location */}
-                <p className="text-sm text-gray-500">
-                    📅 {new Date(date).toLocaleDateString()} <br />
-                    📍 {location}
+                {/* Location & Date */}
+                <p className="text-sm text-gray-600 mt-2">
+                    📍 {location} | 📅 {new Date(date).toLocaleDateString()}
                 </p>
 
-                {/* Seats */}
-                <p className="text-sm mt-2">
-                    🎫 <span className="font-medium">Available Seats:</span> {seats}
+                {/* Organizer Info */}
+                <p className="mt-4 text-gray-700 text-sm">
+                    <strong>Organizer:</strong> {category} Team
                 </p>
 
-                {/* Action Button */}
-                <div className="card-actions mt-4 justify-end">
-                    <button className="btn btn-sm btn-primary">Details</button>
+                {/* Description */}
+                <p className="mt-4 text-gray-800 text-sm">
+                    <strong>Description:</strong> {description}
+                </p>
+
+                {/* Registration Info */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 text-sm">
+                    <div>
+                        <span className="font-medium">Available Seats:</span> {seats}
+                    </div>
+                    <div>
+                        <span className="font-medium">Registration Fee:</span> ৳{fee}
+                    </div>
+                    <div>
+                        <span className="font-medium">Registration Deadline:</span>{" "}
+                        {new Date(deadline).toLocaleDateString()}
+                    </div>
+                </div>
+
+                {/* Button */}
+                <div className="mt-6">
+                    <button className="btn btn-primary w-full">Register Now</button>
                 </div>
             </div>
         </div>

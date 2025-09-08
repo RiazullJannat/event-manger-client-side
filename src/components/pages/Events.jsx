@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Event from "../eventComponents/Event";
+import EventCard from "../eventComponents/EventCard";
 
 const Events = () => {
     const [events, setEvents] = useState([]);
@@ -13,10 +13,9 @@ const Events = () => {
     return (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {
-                events.map(event=><Event key={event._id} event={event}></Event>)
+                events.map(event => <EventCard key={event._id} event={event}></EventCard>)
             }
         </div>
     );
 };
-
 export default Events;
